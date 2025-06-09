@@ -1,3 +1,3 @@
-import { useBase } from 'src/store'
-const useEventos = () => useBase('evento', '/legislativo/eventos'); // ✅ Chamada correta
+import { createBaseStore } from 'src/store'
+const useEventos = () => createBaseStore('evento', '/legislativo/eventos'); // ✅ Chamada correta
 export { useEventos }
