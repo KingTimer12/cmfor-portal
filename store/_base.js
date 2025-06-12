@@ -15,9 +15,9 @@ const storesCache = {};
 /**
  * @param {string} baseName
  * @param {string} url - Endpoint da API
- * @param {{ pluralRename?: string, customActions?: Object }} params
+ * @param {{ pluralRename?: string, api?: @import("axios").AxiosInstance, customActions?: Object }} params
  */
-const createBaseStore = (baseName, url, params = { pluralRename: null, customActions: {} }) => {
+const createBaseStore = (baseName, url, params = { pluralRename: null, api: api, customActions: {} }) => {
   const { startLoading, stopLoading } = useLoading();
   const pluralName = params.pluralRename || `${baseName}s`;
 
@@ -32,9 +32,9 @@ const createBaseStore = (baseName, url, params = { pluralRename: null, customAct
           readPage: async (requestParams = {}) => {
             try {
               startLoading();
-              const { data: response } = await api.get(url, { params: requestParams });
+              const { data: response } = await params.api.get(url, { params: requestParams });
               set({
-                [pluralName]: response.data,
+                [pluralName]: response.data || response,
                 pagination: response.pagination || defaultPagination,
               });
             } catch (error) {
@@ -47,7 +47,7 @@ const createBaseStore = (baseName, url, params = { pluralRename: null, customAct
           readAll: async (requestParams = {}) => {
             try {
               startLoading();
-              const { data: response } = await api.get(url + '/all', { params: requestParams });
+              const { data: response } = await params.api.get(url + '/all', { params: requestParams });
               set(() => ({
                 [pluralName]: response["data"],
               }), true);
@@ -61,7 +61,7 @@ const createBaseStore = (baseName, url, params = { pluralRename: null, customAct
           read: async (id) => {
             try {
               startLoading();
-              const { data: response } = await api.get(`${url}/${id}`);
+              const { data: response } = await params.api.get(`${url}/${id}`);
               set({
                 [baseName]: response.data,
               });
