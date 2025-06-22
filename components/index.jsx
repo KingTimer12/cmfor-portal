@@ -1,1 +1,4 @@
 export * from 'src/components/_loading'
+export * from 'src/components/_post'
+export * from 'src/components/_section'
+export * from 'src/components/_slider'
