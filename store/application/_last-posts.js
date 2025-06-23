@@ -1,5 +1,5 @@
 import { apiWordpress } from 'src/services';
 import { createBaseStore } from 'src/store'
 const endPoint = '/posts'
-const usePosts = () => createBaseStore('post', endPoint, { api: apiWordpress });
-export { usePosts }
+const useLastPosts = () => createBaseStore('lastPost', endPoint, { api: apiWordpress });
+export { useLastPosts }

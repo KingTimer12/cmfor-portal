@@ -15,65 +15,75 @@ const storesCache = {};
 /**
  * @param {string} baseName
  * @param {string} url - Endpoint da API
- * @param {{ pluralRename?: string, api?: @import("axios").AxiosInstance, customActions?: Object }} params
+ * @param {{ pluralRename?: string, api?: @import("axios").AxiosInstance, customParams?: Object, customActions?: Object }} params
  */
-const createBaseStore = (baseName, url, params = { pluralRename: null, api: api, customActions: {} }) => {
+const createBaseStore = (baseName, url, params = { pluralRename: null, api: api, customParams: {}, customActions: {} }) => {
   const { startLoading, stopLoading } = useLoading();
   const pluralName = params.pluralRename || `${baseName}s`;
+  const apiUsed = params.api || api;
 
   if (!storesCache[baseName])
     storesCache[baseName] = create(
       devtools(
-        (set) => ({
-          [baseName]: null,
-          [pluralName]: [],
-          pagination: defaultPagination,
-      
-          readPage: async (requestParams = {}) => {
-            try {
-              startLoading();
-              const { data: response } = await params.api.get(url, { params: requestParams });
-              set({
-                [pluralName]: response.data || response,
-                pagination: response.pagination || defaultPagination,
-              });
-            } catch (error) {
-              console.error(`Erro ao buscar ${baseName}:`, error);
-            } finally {
-              stopLoading();
+        (set, get) => {
+            const actions = {
+                readPage: async (requestParams = {}) => {
+                    try {
+                      startLoading();
+                      const { data: response } = await apiUsed.get(url, { params: requestParams });
+                      set({
+                        [pluralName]: response.data || response,
+                        pagination: response.pagination || defaultPagination,
+                      });
+                    } catch (error) {
+                      console.error(`Erro ao buscar ${baseName}:`, error);
+                    } finally {
+                      stopLoading();
+                    }
+                  },
+
+                  readAll: async (requestParams = {}) => {
+                    try {
+                      startLoading();
+                      const { data: response } = await apiUsed.get(url + '/all', { params: requestParams });
+                      set(() => ({
+                        [pluralName]: response["data"],
+                      }), true);
+                    } catch (error) {
+                      console.error(`Erro ao buscar ${baseName}:`, error);
+                    } finally {
+                      stopLoading();
+                    }
+                  },
+
+                  read: async (id) => {
+                    try {
+                      startLoading();
+                      const { data: response } = await apiUsed.get(`${url}/${id}`);
+                      set({
+                        [baseName]: response.data,
+                      });
+                    } catch (error) {
+                      console.error(`Erro ao buscar ${baseName}:`, error);
+                    } finally {
+                      stopLoading();
+                    }
+                  },
             }
-          },
-      
-          readAll: async (requestParams = {}) => {
-            try {
-              startLoading();
-              const { data: response } = await params.api.get(url + '/all', { params: requestParams });
-              set(() => ({
-                [pluralName]: response["data"],
-              }), true);
-            } catch (error) {
-              console.error(`Erro ao buscar ${baseName}:`, error);
-            } finally {
-              stopLoading();
-            }
-          },
-      
-          read: async (id) => {
-            try {
-              startLoading();
-              const { data: response } = await params.api.get(`${url}/${id}`);
-              set({
-                [baseName]: response.data,
-              });
-            } catch (error) {
-              console.error(`Erro ao buscar ${baseName}:`, error);
-            } finally {
-              stopLoading();
-            }
-          },
-          
-          ...params.customActions,
-        }),
+
+            const customActions = typeof params.customActions === 'function'
+                ? params.customActions(set, get, { startLoading, stopLoading, baseName, pluralName, url, api: apiUsed })
+                : {};
+
+            return {
+                [baseName]: null,
+                [pluralName]: [],
+                pagination: defaultPagination,
+                ...params.customParams,
+                ...actions,
+                ...customActions,
+              }
+        },
         {
           name: `${baseName}Store`
         }
