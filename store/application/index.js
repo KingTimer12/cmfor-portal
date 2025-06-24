@@ -1,3 +1,4 @@
+export * from 'src/store/application/_vereadores'
 export * from 'src/store/application/_last-posts'
 export * from 'src/store/application/_eventos'
 export * from 'src/store/application/_videos'

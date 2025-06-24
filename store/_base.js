@@ -32,7 +32,7 @@ const createBaseStore = (baseName, url, params = { pluralRename: null, api: api,
                       startLoading();
                       const { data: response } = await apiUsed.get(url, { params: requestParams });
                       set({
-                        [pluralName]: response.data || response,
+                        [pluralName]: response.data || response.results || response,
                         pagination: response.pagination || defaultPagination,
                       });
                     } catch (error) {

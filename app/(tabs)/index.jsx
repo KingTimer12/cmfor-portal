@@ -24,7 +24,6 @@ const Home = () => {
   }, [])
 
   if (!posts || !live) return <Text>Carregando...</Text> // Exiba um loader enquanto carrega
-  console.log(live)
   return (
     <ScrollView className='flex-1' nestedScrollEnabled>
         <View className="flex-1">
@@ -34,17 +33,16 @@ const Home = () => {
                 id: item.id.toString() // Certifique-se de que o ID é uma string
             }))} />
             <Section title="Últimas notícias">
-                <FlatList
-                    data={posts.map(item => ({
-                        id: item.id.toString(),
-                        title: item.title.rendered,
-                        image: item._embedded['wp:featuredmedia']?.[0]?.source_url || ''
-                    }))}
-                    numColumns={2}
-                    keyExtractor={item => item.id}
-                    renderItem={({item}) => <PostBanner image={item.image} title={item.title} />}
-                    key="two-column-list"
-                />
+            <View className="flex-row flex-wrap">
+                {posts.map(item => (
+                <View key={item.id} className="w-1/2 p-2">
+                    <PostBanner
+                        image={item._embedded['wp:featuredmedia']?.[0]?.source_url || ''}
+                        title={item.title.rendered}
+                    />
+                </View>
+                ))}
+            </View>
             </Section>
             <Section title="TV Câmara">
                 <YoutubePlayer
