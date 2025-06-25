@@ -25,14 +25,62 @@ return (
             }}
         />
         <Tabs.Screen
-            name="comunicacao"
+            name="legislativo/comissoes"
+            options={{
+                href: null,
+            }}
+        />
+        <Tabs.Screen
+            name="comunicacao/index"
             options={{
                 title: 'Comunicação',
                 tabBarIcon: ({ color }) => <MaterialIcons size={28} name="message" color={color} />,
             }}
         />
         <Tabs.Screen
-            name="cidadao"
+            name="comunicacao/comunicacao-social"
+            options={{
+                href: null,
+            }}
+        />
+        <Tabs.Screen
+            name="comunicacao/radio-fortaleza"
+            options={{
+                href: null,
+            }}
+        />
+        <Tabs.Screen
+            name="comunicacao/camara-noticias"
+            options={{
+                href: null,
+            }}
+        />
+        <Tabs.Screen
+            name="comunicacao/projetos-especiais"
+            options={{
+                href: null,
+            }}
+        />
+        <Tabs.Screen
+            name="comunicacao/publicacoes"
+            options={{
+                href: null,
+            }}
+        />
+        <Tabs.Screen
+            name="comunicacao/revista-nossa-voz"
+            options={{
+                href: null,
+            }}
+        />
+        <Tabs.Screen
+            name="comunicacao/tv-camara"
+            options={{
+                href: null,
+            }}
+        />
+        <Tabs.Screen
+            name="cidadao/index"
             options={{
                 title: 'Cidadão',
                 tabBarIcon: ({ color }) => <MaterialIcons size={28} name="person" color={color} />,

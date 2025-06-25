@@ -2,26 +2,27 @@ import { useRouter } from 'expo-router';
 import React from 'react'
 import { View, ScrollView, Text } from 'react-native'
 import { Section, CardFeature } from 'src/components';
-import { usePosts } from 'src/store'
+import * as WebBrowser from 'expo-web-browser';
 
 const Legislativo = () => {
   const router = useRouter();
+  const year = new Date().getFullYear();
 
   const legislativa = [
     { title: 'Vereadores', onClick: () => router.push('/legislativo/vereadores') },
-    { title: 'Mesa diretora' },
-    { title: 'Diário Oficial' },
-    { title: 'Matérias Legislativas' },
-    { title: 'Sessões Plenárias' },
-    { title: 'Pautas das Sessões' },
-    { title: 'Relatórios' },
-    { title: 'Lei Orgânica' },
-    { title: 'Regimento Interno' },
-    { title: 'Normas por Assunto' }
+    { title: 'Mesa diretora', onClick: async () => await WebBrowser.openBrowserAsync('https://sapl.fortaleza.ce.leg.br/mesa-diretora/') },
+    { title: 'Diário Oficial', onClick: async () => await WebBrowser.openBrowserAsync('https://diariooficial.fortaleza.ce.gov.br/') },
+    { title: 'Matérias Legislativas', onClick: async () => await WebBrowser.openBrowserAsync('https://sapl.fortaleza.ce.leg.br/materia/pesquisar-materia') },
+    { title: 'Sessões Plenárias', onClick: async () => await WebBrowser.openBrowserAsync('https://sapl.fortaleza.ce.leg.br/sessao/pesquisar-sessao?data_inicio__year=' + year) },
+    { title: 'Pautas das Sessões', onClick: async () => await WebBrowser.openBrowserAsync('https://sapl.fortaleza.ce.leg.br/sessao/pauta-sessao/pesquisar-pauta?data_inicio__year=' + year) },
+    { title: 'Relatórios', onClick: async () => await WebBrowser.openBrowserAsync('https://sapl.fortaleza.ce.leg.br/sistema/relatorios/') },
+    { title: 'Lei Orgânica', onClick: async () => await WebBrowser.openBrowserAsync('https://sapl.fortaleza.ce.leg.br/ta/44/text') },
+    { title: 'Regimento Interno', onClick: async () => await WebBrowser.openBrowserAsync('https://sapl.fortaleza.ce.leg.br/ta/3697/text') },
+    { title: 'Normas por Assunto', onClick: async () => await WebBrowser.openBrowserAsync('https://sapl.fortaleza.ce.leg.br/norma/pesquisar') }
   ];
 
   const commissions = [
-    { title: 'Convocação das Comissões' },
+    { title: 'Convocação das Comissões', onClick: () => router.push('/legislativo/comissoes') },
     { title: '' },
     { title: '' },
   ];
