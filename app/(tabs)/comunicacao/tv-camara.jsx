@@ -1,7 +1,7 @@
 import React from 'react'
 import { View, ScrollView, useWindowDimensions } from 'react-native'
 import RenderHTML from 'react-native-render-html';
-import { Section } from 'src/components';
+import { Section, VideosSection } from 'src/components';
 import { usePages } from 'src/store'
 
 const TVCamara = () => {
@@ -25,8 +25,9 @@ const TVCamara = () => {
     return (
       <ScrollView className="flex-1" nestedScrollEnabled>
           <View className="flex-1">
-              <Section title="TV Câmara Fortaleza 7.2">
+              <Section backButton title="TV Câmara Fortaleza 7.2">
                   <RenderHTML contentWidth={width} tagsStyles={tagsStyles} source={{ html: page }} />
+                  <VideosSection />
               </Section>
           </View>
       </ScrollView>

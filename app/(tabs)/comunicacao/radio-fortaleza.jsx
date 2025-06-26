@@ -25,7 +25,7 @@ const RadioFortaleza = () => {
     return (
       <ScrollView className="flex-1" nestedScrollEnabled>
           <View className="flex-1">
-              <Section title="Fortaleza FM 90.7">
+              <Section backButton title="Fortaleza FM 90.7">
                   <RenderHTML contentWidth={width} tagsStyles={tagsStyles} source={{ html: page }} />
               </Section>
           </View>

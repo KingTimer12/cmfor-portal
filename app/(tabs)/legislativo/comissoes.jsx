@@ -31,7 +31,7 @@ const Comissoes = () => {
   return (
     <ScrollView className="flex-1" nestedScrollEnabled>
         <View className="flex-1">
-            <Section title="Convocações das Comissões">
+            <Section backButton title="Convocações das Comissões">
                 <RenderHTML contentWidth={width} tagsStyles={tagsStyles} source={{ html: page }} />
             </Section>
         </View>

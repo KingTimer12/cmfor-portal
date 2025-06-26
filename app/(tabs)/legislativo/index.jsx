@@ -30,7 +30,7 @@ const Legislativo = () => {
   return (
     <ScrollView className="flex-1" nestedScrollEnabled>
         <View className="flex-1">
-            <Section title="Atividade legislativa">
+            <Section backButton title="Atividade legislativa">
                 <View className="flex-row flex-wrap">
                     {legislativa.map((feature, index) => (
                         <CardFeature

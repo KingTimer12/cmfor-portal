@@ -50,7 +50,7 @@ const ProjetosEspeciais = () => {
     return (
       <ScrollView className="flex-1" nestedScrollEnabled>
           <View className="flex-1">
-              <Section title="Projetos Especiais">
+              <Section backButton title="Projetos Especiais">
                   <View className='mt-4'>
                     <RenderHTML
                         WebView={WebView}

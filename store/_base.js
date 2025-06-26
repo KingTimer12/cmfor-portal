@@ -75,13 +75,19 @@ const createBaseStore = (baseName, url, params = { pluralRename: null, api: api,
                 ? params.customActions(set, get, { startLoading, stopLoading, baseName, pluralName, url, api: apiUsed })
                 : {};
 
+            const funActions = {
+                ...customActions,
+                ...actions,
+            }
+
+            console.log(funActions)
+
             return {
                 [baseName]: null,
                 [pluralName]: [],
                 pagination: defaultPagination,
                 ...params.customParams,
-                ...actions,
-                ...customActions,
+                ...funActions,
               }
         },
         {

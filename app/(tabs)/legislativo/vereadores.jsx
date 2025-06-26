@@ -15,7 +15,7 @@ const Vereadores = () => {
   return (
     <ScrollView className="flex-1" nestedScrollEnabled>
         <View className="flex-1">
-            <Section title="Vereadores">
+            <Section backButton title="Vereadores">
                 <View className="flex-row flex-wrap">
                     {vereadores.filter(f => f.ativo).map((vereador, index) => (
                         <CardVereador vereador={vereador} key={index} />

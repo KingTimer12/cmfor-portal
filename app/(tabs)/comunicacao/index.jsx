@@ -19,7 +19,7 @@ const Comunicacao = () => {
   return (
     <ScrollView className="flex-1" nestedScrollEnabled>
         <View className="flex-1">
-            <Section title="Comunicação">
+            <Section backButton title="Comunicação">
                 <View className="flex-row flex-wrap">
                     {comunicacao.map((feature, index) => (
                         <CardFeature

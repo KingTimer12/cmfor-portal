@@ -1,16 +1,23 @@
+import { useRouter } from 'expo-router';
 import React from 'react';
-import { Dimensions, FlatList, Image, Text, View } from 'react-native';
+import { Dimensions, FlatList, Image, Text, TouchableOpacity, View } from 'react-native';
 
 const { width } = Dimensions.get('screen');
 
 const SliderItem = ({ item }) => {
+    const router = useRouter();
+
+    const handlePress = React.useCallback(() => {
+        router.push(`/noticias/${item.slug}`);
+    }, [item.slug, router])
+
     return (
-        <View className='flex flex-col items-center justify-center p-4 gap-5' style={{ width: width }}>
+        <TouchableOpacity className='flex flex-col items-center justify-center p-4 gap-5' style={{ width: width }} onPress={handlePress}>
             <Image source={{ uri: item.image }} style={{ width: 450, height: 250 }} resizeMode='center' />
             <View className='absolute p-5 rounded-md bottom-6 left-11 right-0 shadow-lg bg-white/90 w-96'>
                 <Text className='text-primary text-xl font-bold' numberOfLines={2} ellipsizeMode='tail'>{item.title}</Text>
             </View>
-        </View>
+        </TouchableOpacity>
     );
 };
 

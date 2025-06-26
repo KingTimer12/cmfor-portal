@@ -31,7 +31,7 @@ const Publicacoes = () => {
     return (
       <ScrollView className="flex-1" nestedScrollEnabled>
           <View className="flex-1">
-              <Section title="Publicações">
+              <Section backButton title="Publicações">
                   <RenderHTML contentWidth={width} tagsStyles={tagsStyles} source={{ html: page }} />
               </Section>
           </View>

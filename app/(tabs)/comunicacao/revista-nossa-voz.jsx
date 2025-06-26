@@ -36,7 +36,7 @@ const Revista = () => {
     return (
       <ScrollView className="flex-1" nestedScrollEnabled>
           <View className="flex-1">
-              <Section title="Revista Nossa Voz">
+              <Section backButton title="Revista Nossa Voz">
                   <RenderHTML contentWidth={width} renderers={renderers} tagsStyles={tagsStyles} source={{ html: page }} />
               </Section>
           </View>

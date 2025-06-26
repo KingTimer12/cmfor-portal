@@ -9,6 +9,7 @@ return (
             options={{
                 title: 'Home',
                 tabBarIcon: ({ color }) => <MaterialIcons size={28} name="house" color={color} />,
+                unmountOnBlur: true
             }}
         />
         <Tabs.Screen
@@ -75,6 +76,18 @@ return (
         />
         <Tabs.Screen
             name="comunicacao/tv-camara"
+            options={{
+                href: null,
+            }}
+        />
+        <Tabs.Screen
+            name="noticias/[slug]"
+            options={{
+                href: null,
+            }}
+        />
+        <Tabs.Screen
+            name="noticias/index"
             options={{
                 href: null,
             }}

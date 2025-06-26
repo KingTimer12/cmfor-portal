@@ -15,7 +15,7 @@ const Cidadao = () => {
   return (
     <ScrollView className="flex-1" nestedScrollEnabled>
         <View className="flex-1">
-            <Section title="Serviços ao cidadão">
+            <Section backButton title="Serviços ao cidadão">
                 <View className="flex-row flex-wrap">
                     {cidadao.map((feature, index) => (
                         <CardFeature
