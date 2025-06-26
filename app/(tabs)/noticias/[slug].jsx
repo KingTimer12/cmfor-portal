@@ -12,14 +12,12 @@ import RenderHTML from 'react-native-render-html';
 const Noticia = () => {
     const { width } = useWindowDimensions();
 	const { slug } = useLocalSearchParams()
-    const { readPage, posts } = usePosts()
+    const { readPost, post } = usePosts()
 
     React.useEffect(() => {
-        readPage({ _embed: true, slug: slug })
+        readPost(slug)
     }, [slug])
 
-    if (!posts) return <View className="flex-1 items-center justify-center"><Text>Carregando...</Text></View>
-    const post = posts[0]
     if (!post) return <View className="flex-1 items-center justify-center"><Text>Notícia não encontrada</Text></View>
 
     const tagsStyles = {
